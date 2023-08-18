@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♾️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Title -->
+    <h1>Unsplash API - Infinite Scroll</h1>
+    <!-- Loader -->
+    <div class="loader" id="loader" hidden>
+        <img src="loader.svg" alt="Loading">
+    </div>
+    <!-- Image Container -->
+    <div class="image-container" id="image-container">
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+        <img src="https://images.unsplash.com/photo-1691253121201-c663ed9a0ba8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=685&q=80" >
+        <img src="https://images.unsplash.com/photo-1691253121599-073f111aa375?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80" >
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+        <img src="https://images.unsplash.com/photo-1691253121201-c663ed9a0ba8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=685&q=80" >
+        <img src="https://images.unsplash.com/photo-1691253121599-073f111aa375?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80" >
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+        <img src="https://images.unsplash.com/photo-1691253121201-c663ed9a0ba8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=685&q=80" >
+        <img src="https://images.unsplash.com/photo-1691253121599-073f111aa375?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80" >
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+        <img src="https://images.unsplash.com/photo-1691253121201-c663ed9a0ba8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=685&q=80" >
+        <img src="https://images.unsplash.com/photo-1691253121599-073f111aa375?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80" >
+        <img src="https://images.unsplash.com/photo-1692045155710-b26bcf5efe5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Two Jack lake Banff national park Canadian Rockies">
+    </div>
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
