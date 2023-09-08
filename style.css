@@ -9,6 +9,7 @@ body {
   min-height: 100vh;
   font-family: Bebas Neue, sans-serif;
   background-color: whitesmoke;
+  padding: 0 15px;
 }
 
 h1 {
@@ -35,11 +36,21 @@ h1 {
 /* Image Container */
 .image-container {
   column-count: 3;
-  column-gap: 20px 20px;
-  width: 80vw;
+  column-gap: 5px;
+  width: 70vw;
   margin: auto;
 }
 
 .image-container img {
   width: 100%;
+}
+
+@media (max-width:641px)  {
+  h1 {
+    font-size: 20px;
+  }
+  .image-container {
+    column-count: 1;
+    width: 100%;
+  }
 }
