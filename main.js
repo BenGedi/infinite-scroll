@@ -1,8 +1,27 @@
+import './style.css'
+import loaderIcon from "./assets/svg/loader.svg";
+
+document.querySelector('#app').innerHTML = `
+  <div>
+      <!-- Title -->
+      <h1>Gallery - Infinite Scroll</h1>
+      <!-- Loader -->
+      <div class="loader" id="loader">
+          <img src="${loaderIcon}" alt="Loading">
+      </div>
+      <!-- Image Container -->
+      <div class="image-container" id="image-container"></div>
+      <!-- Script -->
+  </div>
+`;
+
 const imageContainer = document.getElementById('image-container');
 const loader = document.getElementById('loader');
 // Unsplash API
 let count = 5;
-const apiKey = '56yHMGQaCGYt-bdaFsE_-oABCluQE70lfv04bXIG_RE';
+
+const apiKey = import.meta.env.VITE_API_KEY;
+debugger;
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
 
 let ready = false;
