@@ -34,7 +34,7 @@ function displayPhotos() {
     imagesLoaded = 0;
     totalImages = photosArray.length;
     photosArray.forEach(photo => {
-        const item = document.createElement('a');
+        const a = document.createElement('a');
         setAttributes(a, {
             href: photo.links.html,
             target: '_blank',
@@ -47,7 +47,7 @@ function displayPhotos() {
         });
         // Event Listener, check when each is finished loading
         img.addEventListener('load', imageLoaded);
-        item.appendChild(img);
+        a.appendChild(img);
         imageContainer.appendChild(a);
 
     })
