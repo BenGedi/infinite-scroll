@@ -35,7 +35,7 @@ const imageContainer = document.getElementById("image-container");
 const loader = document.getElementById("loader");
 const checkbox = document.querySelector("input[type=checkbox]");
 // Unsplash API
-let count = 8;
+let count = 15;
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
@@ -71,6 +71,7 @@ function displayPhotos() {
     photosArray.forEach((photo) => {
     const a = document.createElement("a");
         setAttributes(a, {
+            class: "image-link",
             href: photo.links.html,
             target: "_blank",
         });
@@ -113,7 +114,7 @@ checkbox.addEventListener("change", (e) => {
     document.body.dataset.theme = e.target.checked ? "dark" : "light";
     localStorage.setItem("theme", document.body.dataset.theme);
 });
-
+// Set initial theme
 if (localStorage.getItem("theme") === "dark") {
     document.body.dataset.theme = "dark";
     checkbox.checked = true;
