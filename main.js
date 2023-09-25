@@ -1,7 +1,7 @@
 import "./style.css";
 import loaderIcon from "./assets/svg/loader.svg";
 
-document.querySelector("#app").innerHTML = `
+document.querySelector("#app").innerHTML = /*html*/`
     <header class="main-header">
         <!-- Title -->
         <h1>Gallery - Infinite Scroll</h1>
@@ -64,17 +64,70 @@ function imageLoaded() {
     }
 }
 
+function openImage(event) {
+    const imageWrapper = event.target.closest(".image-wrapper");
+    const imageModal= imageWrapper.querySelector(".image-modal");
+
+    if(imageModal.classList.contains("open")) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    
+
+    const imageLink = imageModal.querySelector(".image-link");
+    const image = event.target;
+    const {width, height} = window.getComputedStyle(image);
+    imageWrapper.style.width = width;
+    imageWrapper.style.height = height;
+
+    imageModal.classList.add('open');
+    const closeButton = document.createElement("button");
+    closeButton.classList.add("modal-close");
+    closeButton.innerHTML = "&times;";
+
+    const closeModalEsc = (e) => {
+        if(e.key === "Escape") closeModal(e);
+    };
+    document.addEventListener("keydown", closeModalEsc);
+
+    const closeModal = (e) => {
+        e.stopPropagation();
+        imageModal.classList.remove('open');
+        imageWrapper.removeAttribute("style");
+        closeButton.remove();
+        document.removeEventListener("keydown", closeModalEsc);
+    };
+    closeButton.addEventListener("click", closeModal);
+    imageLink.appendChild(closeButton);
+}
+
 // Create Elements for Links & photos, Add to DOM
 function displayPhotos() {
     imagesLoaded = 0;
     totalImages = photosArray.length;
     photosArray.forEach((photo) => {
-    const a = document.createElement("a");
+        const div = document.createElement("div");
+        setAttributes(div, {
+            class: "image-wrapper",
+        });
+        div.addEventListener("click", openImage);
+        const modal = document.createElement("div");
+        setAttributes(modal, {
+            class: "image-modal",
+        });
+        const a = document.createElement("div");
         setAttributes(a, {
             class: "image-link",
-            href: photo.links.html,
-            target: "_blank",
         });
+        a.addEventListener("click", (event) => {
+            const imageWrapper = event.target.closest(".image-wrapper");
+            const imageModal= imageWrapper.querySelector(".image-modal");
+        
+            if(!imageModal.classList.contains("open")) return;
+            event.stopPropagation();
+            if(event.currentTarget.classList.contains("modal-close")) return;
+            window.open(photo.links.html);
+        })
         const img = document.createElement("img");
         setAttributes(img, {
             src: photo.urls.regular,
@@ -84,15 +137,19 @@ function displayPhotos() {
         // Event Listener, check when each is finished loading
         img.addEventListener("load", imageLoaded);
         a.appendChild(img);
-        imageContainer.appendChild(a);
+        modal.appendChild(a);
+        div.appendChild(modal);
+        imageContainer.appendChild(div);
     });
 }
 
 // Get photo from Unsplash API
-async function getPhotos() {
+async function getPhotos(isScrolling) {
     try {
-        photosArray = await (await fetch(apiUrl)).json();
+        const photos = !isScrolling && JSON.parse(localStorage.getItem("photos"));
+        photosArray = photos || await (await fetch(apiUrl)).json();
         displayPhotos();
+        localStorage.setItem("photos", JSON.stringify(photosArray));
     } catch (error) {
         console.log(error);
     }
@@ -105,7 +162,7 @@ window.addEventListener("scroll", () => {
         ready
     ) {
         ready = false;
-        getPhotos();
+        getPhotos(true);
     }
 });
 
